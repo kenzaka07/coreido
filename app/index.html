@@ -1,0 +1,444 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#1c1c1c">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#1c1c1c">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1c1c1c">
+
+    <title> COREIDO Translation Service </title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css" />
+    <link href="images/fav/favicon-32x32.png" rel="icon" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="css/translators.css?v=1.0">
+    <link rel="stylesheet" href="css/loader.css?v=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+<body>
+    <div id="login_form_div" class="login-form-div">
+        <h3>Translators Login</h3>
+        <input class="login-form" type="email" placeholder="Email..." id="email_field" name="email" autocomplete="on"/>
+        <input class="login-form" type="password" placeholder="Password..." id="password_field" name="password" autocomplete="on"/>
+        <button type="submit" class="login-form" onclick="login()">Login</button>
+    </div>
+
+
+	<div id="main_container" class="main-container-translator">
+		<div id="main_content" class="main-content">
+			<!-- HEADER AREA -->
+			<div id="main_header" class="main-header">
+				<section class="branding-logo">
+					<a href="/index.html" aria-label="Go to homepage">
+						<img src="images/coreido-logo-bg-black.png" alt="Coreido" height="40px" width="auto" />
+					</a>
+				</section>
+				<section id="welcomeSection" class="right-header">
+
+					
+				</section>
+			</div>
+
+			
+			<!-- LOADER AREA -->
+			<div id="loader" class="loader">
+				<svg viewBox="0 0 32 32" width="32" height="32">
+					<circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+				</svg>
+			</div>
+
+			<div id="modalLoader" class="modal-loader">
+				<svg viewBox="0 0 32 32" width="32" height="32">
+					<circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+				</svg>
+			</div>
+
+
+
+			<div id="main_body" class="main-body" align="center">
+			<!-- TITLE AREA -->
+				<div class="flex-title-container">
+					<div class="section-title"><h2>My Profile</h2></div>
+					<div class="edit-profile-container">
+						<div><button id="btnEditProfile" class="btn btn-edit-profile">Edit Profile</button></div>
+					</div>
+				</div>
+				
+				<div id="main" class="main" align="center">
+
+
+				</div>
+
+				<div id="modalLoaderBG" class="modal-loader-bg">
+					<div class="modal-loader-content"></div>
+				</div>
+			</div>
+
+			<!-- The Modal -->
+			<div id="modalEditProfile" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+					<div class="modal-header">
+						<span class="close">&times;</span>
+						<h2 class="modal-header">Edit Profile</h2>
+					</div>
+					<div class="modal-body">
+						<div id="callbackResult" class="callback-result"><p id="result"></p></div>
+						<div id="modalPersonalDetails" class="modal-details-container">
+							<h4 class="h4-modal-details-container">Personal Details</h4>
+							<form>
+								<div class="form-textbox-container">
+									<div class="textbox-title">Firstname:</div>
+									<div class="textbox-input"><input type="text" name="updateFirstName" id="updateFirstName" required></div>
+								</div>
+								<div class="form-textbox-container">
+									<div class="textbox-title">Lastname:</div>
+									<div class="textbox-input"><input type="text" name="updateLastName" id="updateLastName" required></div>
+								</div>
+								<div class="form-textbox-container">
+									<div class="textbox-title">Gender:</div>
+									<div class="textbox-input">
+										<select id="updateGender">
+											<option value=""></option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-textbox-container">
+								</div>
+							</form>
+						</div>
+						</br>
+						</br>
+						<div id="modalContactDetails" class="modal-details-container">
+							<h4 class="h4-modal-details-container">Contact Details</h4>
+							<form>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Email Address:</div>
+										<div class="textbox-input"><input type="email" name="updateEmailAddress" id="updateEmailAddress" placeholder="someone@domain.com" required></div>
+									</div>
+
+									<div class="form-textbox-container">
+										<div class="textbox-title">Phone Number:</div>
+										<div class="textbox-input"><input type="tel" name="updatePhoneNumber" id="updatePhoneNumber"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Cell Number:</div>
+										<div class="textbox-input"><input type="tel" name="updateCellNumber" id="updateCellNumber"></div>
+									</div>
+									<div class="form-textbox-container">
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Personal Website:</div>
+										<div class="textbox-input"><input type="text" name="updatePersonalWebsite" id="updatePersonalWebsite"></div>
+									</div>
+
+									<div class="form-textbox-container">
+										<div class="textbox-title">Proz Profile:</div>
+										<div class="textbox-input"><input type="text" name="updateProzProfileURL" id="updateProzProfileURL"></div>
+									</div>
+
+									<div class="form-textbox-container">
+										<div class="textbox-title">LinkedIn Profile:</div>
+										<div class="textbox-input"><input type="text" name="updateLinkedInProfileURL" id="updateLinkedInProfileURL"></div>
+									</div>
+									<div class="form-textbox-container">
+									</div>
+								</div>
+							</form>
+						</div>
+						</br>
+						</br>
+						<div id="modalAddressDetails" class="modal-details-container">
+							<h4 class="h4-modal-details-container">Primary Address Details</h4>
+							<form>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Primary Address:</div>
+										<div class="textarea-input"><textarea type="text" name="updateAddress1" id="updateAddress1"></textarea></div>
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Country:</div>
+										<select id="updateCountry1"></select>
+
+										<!--div class="textbox-input"><input type="text" name="country" id="country"></div-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">City:</div>
+										<div class="textbox-input"><input type="text" name="updateCity1" id="updateCity1"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Zip Code:</div>
+										<div class="textbox-input"><input type="text" name="updateZipCode1" id="updateZipCode1"></div>
+									</div>
+									<div class="form-textbox-container">
+									</div>
+								</div>
+							</form>
+							</br>
+							<h4 class="h4-modal-details-container">Secondary Address Details</h4>
+							<form>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Secondary Address:</div>
+										<div class="textarea-input"><textarea type="text" name="updateAddress2" id="updateAddress2"></textarea></div>
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Country:</div>
+										<select id="updateCountry2"></select>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">City:</div>
+										<div class="textbox-input"><input type="text" name="updateCity2" id="updateCity2"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Zip Code:</div>
+										<div class="textbox-input"><input type="text" name="updateZipCode2" id="updateZipCode2"></div>
+									</div>
+									<div class="form-textbox-container">
+									</div>
+								</div>
+							</form>
+						</div>
+						</br>
+						</br>
+						<div id="modalFinancialDetails" class="modal-details-container">
+							<h4 class="h4-modal-details-container">Financial Details</h4>
+							<form>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Bank Name:</div>
+										<div class="textbox-input"><input type="text" name="updateBankName" id="updateBankName"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Bank Code:</div>
+										<div class="textbox-input"><input type="text" name="updateBankCode" id="updateBankCode"></div>
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Branch Name:</div>
+										<div class="textbox-input"><input type="text" name="updateBranchName" id="updateBranchName"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Branch Code:</div>
+										<div class="textbox-input"><input type="text" name="updateBranchCode" id="updateBranchCode"></div>
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Bank Address:</div>
+										<div class="textarea-input"><textarea type="text" name="updateBankAddress" id="updateBankAddress"></textarea></div>
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<div class="form-textbox-container">
+										<div class="textbox-title">Beneficiary Name:</div>
+										<div class="textbox-input"><input type="text" name="updateBeneficiaryName" id="updateBeneficiaryName"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Account Number:</div>
+										<div class="textbox-input"><input type="text" name="updateAccountNumber" id="updateAccountNumber"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Swift Code:</div>
+										<div class="textbox-input"><input type="text" name="updateSwiftCode" id="updateSwiftCode"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">IBAN:</div>
+										<div class="textbox-input"><input type="text" name="updateIban" id="updateIban"></div>
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Currency:</div>
+										<select id="updateCurrency" onchange="changeCurrency(this.value)"></select>
+										<!--div class="textbox-input"><input type="text" name="updateCurrency" id="updateCurrency" onchange="changeCurrency(this.value)"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Paypal Account:</div>
+										<div class="textbox-input"><input type="text" name="updatePaypalAccount" id="updatePaypalAccount"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						</br>
+						</br>
+						<div id="modalTranslationDetails" class="modal-details-container">
+							<h4 class="h4-modal-details-container">Translation Details</h4>
+							<form>
+								<div class="form-category-container">
+									<h5 class="h5-modal-details-container">Language</h5>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Primary Language:</div>
+										<select id="updateSourceLanguage1"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateSourceLanguage1" id="updateSourceLanguage1"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Secondary Language:</div>
+										<select id="updateSourceLanguage2"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateSourceLanguage2" id="updateSourceLanguage2"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Target Language:</div>
+										<select id="updateTargetLanguage"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateTargetLanguage" id="updateTargetLanguage"></div>-->
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<h5 class="h5-modal-details-container">Area of Specialization</h5>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Area of Specialization 1:</div>
+										<select id="updateAreaOfSpecialization1"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateAreaOfSpecialization1" id="updateAreaOfSpecialization1"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Area of Specialization 2:</div>
+										<select id="updateAreaOfSpecialization2"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateAreaOfSpecialization2" id="updateAreaOfSpecialization2"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Area of Specialization 3:</div>
+										<select id="updateAreaOfSpecialization3"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateAreaOfSpecialization3" id="updateAreaOfSpecialization3"></div>-->
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<h5 class="h5-modal-details-container">Translation Rate</h5>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Primary Language to Mother Tongue:</div>
+										<div class="form-subcategory-container">
+											<div class="form-currency-box-container">
+												<div id="currencyTranslationRate1" class="currency-box"></div>
+											</div>
+											<div class="form-textbox-rate-container">
+												<div class="textbox-rate-input"><input type="text" name="updateTranslationRate_SL1toMT" id="updateTranslationRate_SL1toMT" class="textbox-rate-input"></div>
+											</div>
+										</div>
+										<!--div class="textbox-input"><input type="text" name="updateTranslationRate_SL1toMT" id="updateTranslationRate_SL1toMT></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Secondary Language to Mother Tongue:</div>
+										<div class="form-subcategory-container">
+											<div class="form-currency-box-container">
+												<div id="currencyTranslationRate2" class="currency-box"></div>
+											</div>
+											<div class="form-textbox-rate-container">
+												<div class="textbox-rate-input"><input type="text" name="updateTranslationRate_SL2toMT" id="updateTranslationRate_SL2toMT" class="textbox-rate-input"></div>
+											</div>
+										</div>
+										<!--div class="textbox-input"><input type="text" name="updateTranslationRate_SL2toMT" id="updateTranslationRate_SL2toMT"></div>-->
+									</div>
+								</div>
+								</br>
+								<div class="form-category-container">
+									<h5 class="h5-modal-details-container">Editing Rate</h5>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Primary Language to Mother Tongue:</div>
+										<div class="form-subcategory-container">
+											<div class="form-currency-box-container">
+												<div id="currencyEditRate1" class="currency-box"></div>
+											</div>
+											<div class="form-textbox-rate-container">
+												<div class="textbox-rate-input"><input type="text" name="updateEditingRate_SL1toMT" id="updateEditingRate_SL1toMT" class="textbox-rate-input"></div>
+											</div>
+										</div>
+										<!--div class="textbox-input"><input type="text" name="updateEditingRate_SL1toMT" id="updateEditingRate_SL1toMT"></!--div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Secondary Language to Mother Tongue:</div>
+										<div class="form-subcategory-container">
+											<div class="form-currency-box-container">
+												<div id="currencyEditRate2" class="currency-box"></div>
+											</div>
+											<div class="form-textbox-rate-container">
+												<div class="textbox-rate-input"><input type="text" name="updateEditingRate_SL2toMT" id="updateEditingRate_SL2toMT" class="textbox-rate-input"></div>
+											</div>
+										</div>
+										<!--div class="textbox-input"><input type="text" name="updateEditingRate_SL2toMT" id="updateEditingRate_SL2toMT></div>-->
+									</div>
+								</div>
+								<div class="form-category-container">
+									<h5 class="h5-modal-details-container">Tools</h5>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Cat Tool 1:</div>
+										<select id="updateCatTool1"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateCatTool1" id="updateCatTool1"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Cat Tool 2:</div>
+										<select id="updateCatTool2"></select>
+										<!--<div class="textbox-input"><input type="text" name="updateCatTool2" id="updateCatTool2"></div>-->
+									</div>
+									<div class="form-textbox-container">
+										<div class="textbox-title">Other Tool:</div>
+										<div class="textbox-input"><input type="text" name="updateCatTool_other" id="updateCatTool_other"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+			
+					<div class="modal-footer">
+						<div>
+							<button class="btn btn-cancel" id="btnCancel">Cancel</button><button class="btn btn-primary" onclick="updateUserProfile()">Save</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+
+			<!-- FOOTER AREA -->
+			<div id="main_footer" class="main-footer">
+				<section class="footer-branding-logo">
+					<!--<a href="/" aria-label="Go to homepage">
+						<img src="images/logo-mizutrade.svg" height="50px" width="auto"/>
+					</a>-->
+					<div align="center">
+                        <span class="footer">© 2019 Coreido Translation Services | All Rights Reserved.</span>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/modal.js" type="text/javascript"></script>
+    <script src="js/country.js" type="text/javascript"></script>
+    <script src="js/dropdownlist.js" type="text/javascript"></script>
+    <script src="js/translators.js" type="text/javascript"></script>
+</body>
+</html>
