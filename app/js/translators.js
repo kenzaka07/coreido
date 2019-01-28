@@ -206,14 +206,13 @@ function readUserDetails() {
     document.getElementById("loader").style.visibility = "visible";
 
 
-    var usertype = 'translator';//$("#usertype").val();
-    //var emailAddress = firebaseUser.email;
-    var firstName = $("#firstName").val();
+    var usertype = 'translator';
+    var emailAddress = firebaseUser.email;
     var url = script_url + "?&usertype=" + usertype +
-        "& firstName=" + firstName +
+        "&emailAddress=" + emailAddress +
         "&action=getUserProfile";
     userData;
-    //let googleUserName = $("#lname").val();
+    
     $.getJSON(url, function (json) {
 
         // Set the variables from the results array							
@@ -225,9 +224,9 @@ function readUserDetails() {
 
         userData = appUser[0];
 
-
-        console.log(appUser[0].gender);
-        console.log(appUser[0].country);
+ 
+       // console.log(appUser);
+       // console.log(appUser[0].country);
 
         
 
